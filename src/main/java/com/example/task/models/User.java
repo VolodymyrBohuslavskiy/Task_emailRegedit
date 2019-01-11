@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+
 @Entity
 @Data
 @ToString
@@ -61,10 +62,12 @@ public class User implements UserDetails {
         return isCredentialsNonExpired;
     }
 
-    boolean isEnabled = true;
+    boolean isEnabled = false;
 
     @Override
     public boolean isEnabled() {
         return isEnabled;
     }
+
 }
+
