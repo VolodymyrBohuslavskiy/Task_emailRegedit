@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="uk" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body>
+
+<form th:action="@{'/login'}" method="post" style="margin: 50px; text-align: center">
+    Login :
+    <input type="text" name="username" placeholder="username">
+    <input type="text" name="password" placeholder="password">
+    <input type="submit" value="Enter">
+</form>
+
+<form th:action="@{'/add'}" method="post" style="margin: 50px; text-align: center">
+    Reg:
+    <input type="text" name="email" placeholder="email">
+    <input type="text" name="username" placeholder="login">
+    <input type="text" name="password" placeholder="password">
+
+    <input type="submit" value="Save user">
+</form>
+
+</body>
+</html>
