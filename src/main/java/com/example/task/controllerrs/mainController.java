@@ -33,7 +33,7 @@ public class mainController {
 
     @PostMapping("/add")
     public String add(User user) {
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.save(user);
         return "login";
     }

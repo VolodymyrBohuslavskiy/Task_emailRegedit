@@ -18,10 +18,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class securityConfig extends WebSecurityConfigurerAdapter {
 
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("qqq").password("{noop}qqq").roles("ADMIN");
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication().withUser("qqq").password("{noop}qqq").roles("ADMIN");
+//    }
 
     //    sec parth2ConfigureHTTP
     @Override
