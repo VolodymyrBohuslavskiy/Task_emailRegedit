@@ -6,10 +6,6 @@
 </head>
 <body>
 <div style="color: crimson"><h1>Fail authorization !</h1></div>
-<div>
-    <a th:href="@{'/login'}">
-        <button>Registry</button>
-    </a></div>
-</body>
+<div th:replace="~{login::addform}"></div>
 </body>
 </html>
