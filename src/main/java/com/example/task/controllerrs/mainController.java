@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.mail.MessagingException;
-
 @Controller
 public class mainController {
     @Autowired
@@ -41,11 +39,14 @@ public class mainController {
     }
 
     @PostMapping("/add")
-    public String add(User user) throws MessagingException {
+    public String add(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.save(user);
-        System.out.println("http://localhost:8080/authorization/" + jwrsService.add(user.getEmail(), "s", 10));
-        emailService.send(user.getEmail(), "http://localhost:8080/authorization/" + jwrsService.add(user.getEmail(), "s", 30));
+        try {
+            emailService.send(user.getEmail(), "http://localhost:8080/authorization/" + jwrsService.add(user.getEmail(), "s", 30));
+        } catch (Exception e) {
+            System.out.println("http://localhost:8080/authorization/" + jwrsService.add(user.getEmail(), "s", 10));
+        }
         return "login";
     }
 
@@ -57,7 +58,7 @@ public class mainController {
             userService.save(user);
             if (user.isEnabled()) return "autoriz";
         } catch (Exception e) {
-            return "login";
+            return "autorizFail";
         }
         return "index";
     }
