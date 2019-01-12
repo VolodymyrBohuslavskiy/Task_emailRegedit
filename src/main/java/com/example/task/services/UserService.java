@@ -17,6 +17,10 @@ public class UserService implements UserDetailsService {
         userDAO.save(user);
     }
 
+    public User findBySecretCode(String secretCode) {
+        return userDAO.findBySecretCode(secretCode);
+    }
+
     private User findByUsername(String username) {
         return userDAO.findByUsername(username);
     }

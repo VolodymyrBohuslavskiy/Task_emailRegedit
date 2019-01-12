@@ -25,7 +25,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    String username, password, email;
+    String username, password, email, secretCode;
     Role role = Role.ROLE_USER;
 
     public User(String username, String password, String email) {

@@ -22,7 +22,6 @@ public class mainController {
     @Autowired
     private emailService emailService;
 
-
     @GetMapping("/")
     public String home() {
         return "index";
@@ -41,14 +40,19 @@ public class mainController {
     @PostMapping("/add")
     public String add(User user) throws MessagingException {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setSecretCode(passwordEncoder.encode(user.getUsername()));
         userService.save(user);
-        emailService.send(user.getEmail(), user.getUsername());
+        System.out.println("http://localhost:8080/authorization/" + user.getSecretCode());
+//        emailService.send(user.getEmail(), "http://localhost:8080/authorization-" + user.getSecretCode());
         return "login";
     }
 
-    @GetMapping("/authorization-{id}")
-    public String authorization(@PathVariable String id) {
-        return "";
+    @GetMapping("/authorization/{code}")
+    public String authorization(@PathVariable String code) {
+        User user = userService.findBySecretCode(code);
+        user.setEnabled(true);
+        userService.save(user);
+                return "login";
     }
 
 }
