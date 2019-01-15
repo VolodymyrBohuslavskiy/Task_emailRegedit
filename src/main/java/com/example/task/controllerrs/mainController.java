@@ -34,9 +34,9 @@ public class mainController {
         try {
             emailService.send(user.getEmail(), "http://localhost:8080/authorization/" + jwrsService.add(user.getEmail(), "s", 30));
         } catch (Exception e) {
-            System.out.println("http://localhost:8080/authorization/" + jwrsService.add(user.getEmail(), "s", 10));
+            System.out.println("http://localhost:8080/authorization/" + jwrsService.add(user.getEmail(), "s", 30));
         }
-        return "login";
+        return "CheckEmail";
     }
 
     @GetMapping("/authorization/{code}")
