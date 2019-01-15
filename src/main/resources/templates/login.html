@@ -6,20 +6,22 @@
 </head>
 <body>
 <div th:fragment="inform">
-<form th:action="@{'/login'}" method="post" style="margin: 50px; text-align: center">
-    Login :
-    <input type="text" name="username" placeholder="username">
-    <input type="password" name="password" placeholder="password">
-    <input type="submit" value="Enter">
-</form></div>
-<div th:fragment="addform">
-<form th:action="@{'/add'}" method="post" style="margin: 50px; text-align: center" >
-    Registry:
-    <input type="email" name="email" placeholder="email">
-    <input type="text" name="username" placeholder="login">
-    <input type="password" name="password" placeholder="password">
-    <input type="submit" value="Save user">
-</form>
+    <form th:action="@{'/login'}" method="post" style="margin: 50px; text-align: center">
+        Login :
+        <input type="text" name="username" placeholder="username">
+        <input type="password" name="password" placeholder="password">
+        <input type="submit" value="Enter">
+    </form>
 </div>
+<div th:fragment="addform">
+    <form th:action="@{'/add'}" method="post" style="margin: 50px; text-align: center">
+        Registry:
+        <input type="email" name="email" placeholder="email">
+        <input type="text" name="username" placeholder="login">
+        <input type="password" name="password" placeholder="password">
+        <input type="submit" value="Save user">
+    </form>
+</div>
+
 </body>
 </html>

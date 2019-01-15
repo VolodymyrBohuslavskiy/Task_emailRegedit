@@ -8,10 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -25,7 +22,13 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    String username, password, email;
+
+//    @Column(unique = true)//Тільки унікальні значення
+    String username, email;
+
+    String password;
+
+//    @Enumerated(EnumType.STRING)//Для запису в БД як строку2
     Role role = Role.ROLE_USER;
 
     public User(String username, String password, String email) {
@@ -34,6 +37,10 @@ public class User implements UserDetails {
         this.email = email;
     }
 
+    boolean isAccountNonExpired = true;
+    boolean isAccountNonLocked = true;
+    boolean isCredentialsNonExpired = true;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> list = new ArrayList<>();
@@ -41,33 +48,26 @@ public class User implements UserDetails {
         return list;
     }
 
-    boolean isAccountNonExpired = true;
+    boolean isEnabled = false;// to login must be "true"
 
     @Override
     public boolean isAccountNonExpired() {
         return isAccountNonExpired;
     }
 
-    boolean isAccountNonLocked = true;
-
     @Override
     public boolean isAccountNonLocked() {
         return isAccountNonLocked;
     }
-
-    boolean isCredentialsNonExpired = true;
 
     @Override
     public boolean isCredentialsNonExpired() {
         return isCredentialsNonExpired;
     }
 
-    boolean isEnabled = false;
-
     @Override
     public boolean isEnabled() {
         return isEnabled;
     }
-
 }
 

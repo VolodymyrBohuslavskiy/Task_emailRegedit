@@ -22,17 +22,6 @@ public class mainController {
     @Autowired
     private jwrsService jwrsService;
 
-
-    @GetMapping("/")
-    public String home() {
-        return "index";
-    }
-
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
     @PostMapping("/hello")
     public String in() {
         return "in";

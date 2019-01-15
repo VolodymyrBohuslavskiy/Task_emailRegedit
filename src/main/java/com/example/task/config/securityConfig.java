@@ -17,18 +17,18 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class securityConfig extends WebSecurityConfigurerAdapter {
 
 
-//    @Override
+//    @Override//     securityPart1InMemoryUser
 //    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("qqq").password("{noop}qqq").roles("ADMIN");
+//        auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("pass")).roles("ADMIN");
 //    }
 
-    //    sec parth2ConfigureHTTP
-    @Override
+
+    @Override//    secPart2ConfigureHTTP
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/","/authorization/**").permitAll()
-                .antMatchers(HttpMethod.POST,"/add").permitAll()
+                .antMatchers("/", "/authorization/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/add").permitAll()
                 .anyRequest().authenticated()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
@@ -44,20 +44,16 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
-    // sec path5 PasswordEncoder
-    @Bean
+    @Bean//     secPath5PasswordEncoder
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-
-    // sec DaoAuthenticationProvider
-
-    @Autowired
-    @Qualifier("userService")
+    @Autowired// sec DaoAuthenticationProvider
+    @Qualifier("userService")// Вибір BEAN для ініціалізації, інакше буде помилка !
     private UserDetailsService userDetailsService;
 
-    @Bean
+    @Bean//     securityPath6AuthenticationProvider
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
